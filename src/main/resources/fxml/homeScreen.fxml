@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.mobilepayprojekt.HomeController">
+    <center>
+        <ImageView fitWidth="150" fitHeight="122" pickOnBounds="true" preserveRatio="true">
+            <Image url="@../images/mobilepay-logo.png" />
+        </ImageView>
+    </center>
+    <bottom>
+        <VBox alignment="CENTER" spacing="5.0">
+            <padding>
+                <Insets bottom="30.0" left="50.0" right="50.0" top="20.0"/>
+            </padding>
+            <Button text="Jeg har aldrig haft MobilePay" fx:id="opretBrugerButton" maxWidth="Infinity" onAction="#onOpretBruger" styleClass="normal-button"/>
+            <Button text="Login (eksisterende bruger)" fx:id="loginButton" maxWidth="Infinity" styleClass="normal-button, text-button"/>
+        </VBox>
+    </bottom>
+</BorderPane>

@@ -1,0 +1,57 @@
+.root {
+    -fx-background-color: #f4f2f0;
+}
+
+.normal-button {
+    -fx-background-color: #416ee7;
+    -fx-text-fill: white;
+    -fx-padding: 10px 30px 10px 30px;
+    -fx-border-radius: 40px;
+    -fx-background-radius: 40px;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+}
+.normal-button:pressed {
+    -fx-background-color: #3658c4;
+}
+
+.text-button {
+    -fx-font-weight: bold;
+    -fx-background-color: transparent;
+    -fx-text-fill: #416ee7;
+}
+.text-button:pressed {
+    -fx-background-color: transparent;
+}
+
+.back-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: black;
+}
+
+.text-field {
+    -fx-background-color: #fdfcfd;
+    -fx-font-size: 16px;
+}
+
+.form-label {
+    -fx-font-weight: bold;
+    -fx-font-size: 13px;
+    -fx-padding: 10px 0 2px 0;
+    -fx-wrap-text: true;
+    -fx-text-alignment: center;
+}
+
+.top-bar {
+    -fx-background-color: white;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.1), 10, 0, 0, 1);
+}
+
+.prefix-label {
+    -fx-background-color: #fdfcfd;
+    -fx-padding: 5px;
+    -fx-font-size: 16px;
+    -fx-border-style: solid;
+    -fx-border-width: 0 1px 0 0;
+    -fx-border-color: #b9b9b9;
+}
