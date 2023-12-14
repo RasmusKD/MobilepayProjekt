@@ -18,7 +18,7 @@
                 <Insets bottom="30.0" left="50.0" right="50.0" top="20.0"/>
             </padding>
             <Button text="Jeg har aldrig haft MobilePay" fx:id="opretBrugerButton" maxWidth="Infinity" onAction="#onOpretBruger" styleClass="normal-button"/>
-            <Button text="Login (eksisterende bruger)" fx:id="loginButton" maxWidth="Infinity" styleClass="normal-button, text-button"/>
+            <Button text="Login (eksisterende bruger)" fx:id="loginButton" maxWidth="Infinity" onAction="#onLogin" styleClass="normal-button, text-button"/>
         </VBox>
     </bottom>
 </BorderPane>

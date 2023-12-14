@@ -12,20 +12,12 @@ import java.io.IOException;
 public class HomeController {
 
     @FXML
-    protected void onLogin() {
-        // Login-logik
+    private void onLogin(ActionEvent event) {
+        NavigationUtil.goToLoginScreen((Node) event.getSource());
     }
 
     @FXML
-    protected void onOpretBruger(ActionEvent event) {
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/userCreationScreen.fxml"));
-            Scene scene = new Scene(fxmlLoader.load(), 360, 640);
-            scene.getStylesheets().add(getClass().getResource("/styles/style.css").toExternalForm());
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(scene);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    private void onOpretBruger(ActionEvent event) {
+        NavigationUtil.goToUserCreationScreen((Node) event.getSource());
     }
 }

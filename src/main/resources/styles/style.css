@@ -1,12 +1,11 @@
 .root {
-    -fx-background-color: #f4f2f0;
+    -fx-background-color: #f3f4ef;
 }
 
 .normal-button {
     -fx-background-color: #416ee7;
     -fx-text-fill: white;
     -fx-padding: 10px 30px 10px 30px;
-    -fx-border-radius: 40px;
     -fx-background-radius: 40px;
     -fx-font-weight: bold;
     -fx-font-size: 14px;
@@ -19,6 +18,7 @@
     -fx-font-weight: bold;
     -fx-background-color: transparent;
     -fx-text-fill: #416ee7;
+    -fx-font-size: 14px;
 }
 .text-button:pressed {
     -fx-background-color: transparent;
@@ -42,11 +42,6 @@
     -fx-text-alignment: center;
 }
 
-.top-bar {
-    -fx-background-color: white;
-    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.1), 10, 0, 0, 1);
-}
-
 .prefix-label {
     -fx-background-color: #fdfcfd;
     -fx-padding: 5px;
@@ -54,4 +49,100 @@
     -fx-border-style: solid;
     -fx-border-width: 0 1px 0 0;
     -fx-border-color: #b9b9b9;
+}
+
+.main-bottom-bar {
+    -fx-background-color: white;
+    -fx-background-radius: 10 10 0 0;
+    -fx-alignment: center;
+    -fx-padding: 5 0;
+}
+
+.main-bottom-bar-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: #8d8d8d;
+}
+
+.top-bar {
+    -fx-background-color: #fafbf6;
+    -fx-effect: dropshadow(three-pass-box, rgb(214, 214, 214), 1, 0, 0, 1);
+}
+
+.icon-inactive {
+    -fx-fill: #8c8c8c;
+}
+
+.icon-active {
+    -fx-fill: #000000;
+}
+
+.username {
+    -fx-text-fill: #3a353f;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+}
+
+.mobilNr {
+    -fx-text-fill: #b5b4b9;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+}
+
+.initials-label {
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+}
+
+.add-label {
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+    -fx-font-size: 20px;
+}
+
+.icon-label-inactive {
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #8c8c8c;
+}
+
+.icon-label-active {
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #000000;
+}
+
+.settings-box {
+    -fx-background-color: white;
+    -fx-background-radius: 8px;
+    -fx-padding: 5px 0;
+}
+
+.konto-box {
+    -fx-background-color: white;
+    -fx-background-radius: 8px;
+    -fx-padding: 10px;
+}
+
+.add-konto-box {
+    -fx-background-color: transparent;
+    -fx-background-radius: 8px;
+    -fx-padding: 5px 0;
+    -fx-border-color: #c4c6df;
+    -fx-border-width: 1px;
+    -fx-border-style: segments(5, 5, 5, 5) line-cap round;
+    -fx-border-radius: 8px;
+}
+
+.settings-box-wrapper {
+    -fx-padding: 15px;
+}
+
+.konto-box-wrapper {
+    -fx-padding: 5px 15px;
+}
+
+.settings-button {
+    -fx-background-color: transparent;
+    -fx-font-size: 16px;
 }

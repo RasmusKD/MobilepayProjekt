@@ -1,11 +1,14 @@
 package com.example.mobilepayprojekt;
 
+import java.util.ArrayList;
+
 public class Bruger {
     private int brugerId;
     private String fnavn;
     private String enavn;
     private String mobilNr;
     private String adgangskode;
+    private ArrayList<Konto> konti;
 
     public Bruger(int brugerId, String fnavn, String enavn, String mobilNr, String adgangskode) {
         this.brugerId = brugerId;
@@ -13,6 +16,7 @@ public class Bruger {
         this.enavn = enavn;
         this.mobilNr = mobilNr;
         this.adgangskode = adgangskode;
+        this.konti = new ArrayList<>();
     }
 
     public int getBrugerId() {
@@ -53,5 +57,35 @@ public class Bruger {
 
     public void setAdgangskode(String adgangskode) {
         this.adgangskode = adgangskode;
+    }
+
+    public ArrayList<Konto> getKonti() {
+        return konti;
+    }
+
+    public void setKonti(ArrayList<Konto> konti) {
+        this.konti = konti;
+    }
+
+    public void tilfoejKonto(Konto konto, boolean isPrimary) {
+        if (isPrimary) {
+            for (Konto existingKonto : konti) {
+                existingKonto.setPrimary(false);
+            }
+        }
+        konto.setPrimary(isPrimary);
+        this.konti.add(konto);
+    }
+
+    public Konto getPrimaryKonto() {
+        for (Konto konto : konti) {
+            if (konto.isPrimary()) {
+                return konto;
+            }
+        }
+        return null;
+    }
+    public void fjernKonto(int kontoId) {
+        konti.removeIf(konto -> konto.getKontoId() == kontoId);
     }
 }

@@ -1,15 +1,10 @@
 package com.example.mobilepayprojekt;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
-
-import java.io.IOException;
 
 public class UserCreationController {
 
@@ -30,7 +25,7 @@ public class UserCreationController {
     private final DbSql dbSql = new DbSql();
 
     @FXML
-    protected void opretBruger() {
+    private void opretBruger() {
         String fnavn = fnavnField.getText();
         String enavn = enavnField.getText();
         String mobilNr = mobilNrField.getText();
@@ -45,21 +40,13 @@ public class UserCreationController {
         try {
             Bruger nyBruger = new Bruger(0, fnavn, enavn, mobilNr, adgangskode);
             dbSql.opretBruger(nyBruger);
-            statusLabel.setText("Ny bruger oprettet: " + fnavn + " " + enavn);
+            statusLabel.setText("Ny bruger oprettet: " + dbSql.formaterNavn(fnavn) + " " + dbSql.formaterNavn(enavn));
         } catch (Exception e) {
             statusLabel.setText("Fejl: " + e.getMessage());
         }
     }
     @FXML
-    protected void onTilbage(ActionEvent event) {
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/homeScreen.fxml"));
-            Scene scene = new Scene(fxmlLoader.load(), 360, 640);
-            scene.getStylesheets().add(getClass().getResource("/styles/style.css").toExternalForm());
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(scene);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    private void onTilbage(ActionEvent event) {
+        NavigationUtil.goToHomeScreen((Node) event.getSource());
     }
 }

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.shape.SVGPath?>
+<?import javafx.scene.shape.Circle?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.mobilepayprojekt.KontiController" stylesheets="@../styles/style.css">
+    <top>
+        <HBox styleClass="top-bar" alignment="CENTER_LEFT" spacing="30">
+            <padding>
+                <Insets bottom="10.0" left="10.0" right="15.0" top="10.0"/>
+            </padding>
+            <Button onAction="#onTilbageFraKonto" styleClass="back-button">
+                <graphic>
+                    <SVGPath content="M299.633777,6519.29231 L299.633777,6519.29231 C299.228878,6518.90256 298.573377,6518.90256 298.169513,6519.29231 L289.606572,6527.55587 C288.797809,6528.33636 288.797809,6529.60253 289.606572,6530.38301 L298.231646,6538.70754 C298.632403,6539.09329 299.27962,6539.09828 299.685554,6538.71753 L299.685554,6538.71753 C300.100809,6538.32879 300.104951,6537.68821 299.696945,6537.29347 L291.802968,6529.67648 C291.398069,6529.28574 291.398069,6528.65315 291.802968,6528.26241 L299.633777,6520.70538 C300.038676,6520.31563 300.038676,6519.68305 299.633777,6519.29231"/>
+                </graphic>
+            </Button>
+            <Label text="Konti" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #3e3345;"/>
+        </HBox>
+    </top>
+    <center>
+        <ScrollPane fitToWidth="true">
+            <VBox>
+                <VBox styleClass="konto-box-wrapper">
+                    <Label text="Primær konto" style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #3e3345;"/>
+                    <Label text="Du vil modtage penge på denne konto" style="-fx-font-size: 16px; -fx-text-fill: #828282;"/>
+                </VBox>
+                <VBox styleClass="konto-box-wrapper">
+                    <HBox styleClass="konto-box" alignment="CENTER_LEFT" spacing="15">
+                        <SVGPath style="-fx-fill: #3a3244" content="M10.8321 1.24802C11.5779 0.917327 12.4221 0.917327 13.1679 1.24802L21.7995 5.0754C23.7751 5.95141 23.1703 9 21.0209 9H2.97906C0.829669 9 0.224891 5.9514 2.20047 5.0754L10.8321 1.24802ZM12.3893 3.12765C12.1407 3.01742 11.8593 3.01742 11.6107 3.12765L3.41076 6.76352C3.31198 6.80732 3.34324 6.95494 3.45129 6.95494H20.5487C20.6568 6.95494 20.688 6.80732 20.5892 6.76352L12.3893 3.12765Z M2 22C2 21.4477 2.44772 21 3 21H21C21.5523 21 22 21.4477 22 22C22 22.5523 21.5523 23 21 23H3C2.44772 23 2 22.5523 2 22Z M11 19C11 19.5523 11.4477 20 12 20C12.5523 20 13 19.5523 13 19V11C13 10.4477 12.5523 10 12 10C11.4477 10 11 10.4477 11 11V19Z M6 20C5.44772 20 5 19.5523 5 19L5 11C5 10.4477 5.44771 10 6 10C6.55228 10 7 10.4477 7 11L7 19C7 19.5523 6.55229 20 6 20Z M17 19C17 19.5523 17.4477 20 18 20C18.5523 20 19 19.5523 19 19V11C19 10.4477 18.5523 10 18 10C17.4477 10 17 10.4477 17 11V19Z"/>
+                        <Label fx:id="primaryKontoLabel" style="-fx-font-size: 16px;"/>
+                        <Region HBox.hgrow="ALWAYS"/>
+                        <Label style="-fx-padding: 10px;">
+                            <graphic>
+                                <SVGPath style="-fx-fill: #5976fd;" content="M2 9.1371C2 14 6.01943 16.5914 8.96173 18.9109C10 19.7294 11 20.5 12 20.5C13 20.5 14 19.7294 15.0383 18.9109C17.9806 16.5914 22 14 22 9.1371C22 4.27416 16.4998 0.825464 12 5.50063C7.50016 0.825464 2 4.27416 2 9.1371Z"/>
+                            </graphic>
+                        </Label>
+                    </HBox>
+                </VBox>
+                <VBox styleClass="konto-box-wrapper">
+                    <Label text="Andre konti" style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #3e3345;"/>
+                </VBox>
+                <VBox fx:id="andreKonti" styleClass="konto-box-wrapper" spacing="10"/>
+                <VBox styleClass="konto-box-wrapper">
+                    <HBox styleClass="add-konto-box" style="-fx-padding: 10;" alignment="CENTER" spacing="10">
+                        <Button onAction="#onNewKonto" styleClass="settings-button">
+                            <graphic>
+                                <HBox alignment="CENTER" spacing="10">
+                                    <StackPane>
+                                        <Circle radius="15" fill="#5a77ff"/>
+                                        <Label text="+" styleClass="add-label"/>
+                                    </StackPane>
+                                    <Label text="Tilføj konto" styleClass="text-button"/>
+                                </HBox>
+                            </graphic>
+                        </Button>
+                    </HBox>
+                </VBox>
+            </VBox>
+        </ScrollPane>
+    </center>
+</BorderPane>
