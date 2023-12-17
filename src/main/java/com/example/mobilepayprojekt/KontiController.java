@@ -17,11 +17,13 @@ import java.util.List;
 
 public class KontiController {
 
-    public VBox andreKonti;
-    private DbSql dbSql = new DbSql();
+    @FXML
+    private VBox andreKonti;
 
     @FXML
     private Label primaryKontoLabel;
+
+    private final DbSql dbSql = new DbSql();
 
     public void initialize() {
         primaryKonto();
@@ -73,9 +75,8 @@ public class KontiController {
                 Button setPrimaryButton = new Button();
                 setPrimaryButton.getStyleClass().add("settings-button");
                 setPrimaryButton.setGraphic(svgIcon2);
-                setPrimaryButton.setOnAction(event -> {
-                    setPrimaryKonto(konto);
-                });
+                setPrimaryButton.setOnAction(event -> setPrimaryKonto(konto));
+
 
                 SVGPath svgIcon3 = new SVGPath();
                 svgIcon3.setStyle("-fx-fill: #e85248");
@@ -84,9 +85,8 @@ public class KontiController {
                 Button sletKontoButton = new Button();
                 sletKontoButton.getStyleClass().add("settings-button");
                 sletKontoButton.setGraphic(svgIcon3);
-                sletKontoButton.setOnAction(event -> {
-                    deleteKonto(konto);
-                });
+                sletKontoButton.setOnAction(event -> deleteKonto(konto));
+
 
                 kontoInfoBox.getChildren().addAll(svgIcon, kontoLabel, sletKontoButton, svgIcon3, region, setPrimaryButton, svgIcon2);
 
@@ -102,8 +102,10 @@ public class KontiController {
             currentUser.fjernKonto(konto.getKontoId());
             konti();
         } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
+
 
     private void setPrimaryKonto(Konto konto) {
         Bruger currentUser = Session.getCurrentUser();
@@ -124,8 +126,10 @@ public class KontiController {
             konti();
 
         } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
+
 
     @FXML
     private void onTilbageFraKonto(ActionEvent event) {

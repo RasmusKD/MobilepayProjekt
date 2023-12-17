@@ -14,38 +14,40 @@ import javafx.scene.shape.SVGPath;
 
 public class MainScreenController {
 
-    public Label userNameLabel;
-    public Label mobilNrLabel;
-    public SVGPath menuIcon;
-    public SVGPath transactionIcon;
-    public SVGPath homeIcon;
-    public Label homeLabel;
-    public Label transactionLabel;
-    public Label menuLabel;
-    public Label initialsLabel;
-
-    private DbSql dbSql = new DbSql();
-
+    @FXML
+    private Label userNameLabel;
+    @FXML
+    private Label mobilNrLabel;
+    @FXML
+    private SVGPath menuIcon;
+    @FXML
+    private SVGPath transactionIcon;
+    @FXML
+    private SVGPath homeIcon;
+    @FXML
+    private Label homeLabel;
+    @FXML
+    private Label transactionLabel;
+    @FXML
+    private Label menuLabel;
+    @FXML
+    private Label initialsLabel;
     @FXML
     private VBox mainView;
-
     @FXML
     private VBox transactionsView;
-
     @FXML
     private VBox userSettingsView;
-
     @FXML
     private TextField beloebField;
-
     @FXML
     private TextField modtagerMobilNrField;
-
     @FXML
     private ComboBox<Konto> kontoValgComboBox;
-
     @FXML
     private Label mainLabel;
+
+    private final DbSql dbSql = new DbSql();
 
     public void initialize() {
         setActiveView(mainView);
@@ -89,7 +91,7 @@ public class MainScreenController {
     }
 
     @FXML
-    protected void sendPenge() {
+    private void sendPenge() {
         try {
             double beloeb = Double.parseDouble(beloebField.getText());
             String modtagerMobilNr = modtagerMobilNrField.getText();
@@ -147,6 +149,7 @@ public class MainScreenController {
     }
 
     //Til at sætte aktiv tab når man går tilbage til main-view
+    //public - vi typecaster til den fra i en anden klasse
     public void setActiveTab(String tabName) {
         if ("mainView".equals(tabName)) {
             setActiveView(mainView);

@@ -17,15 +17,16 @@
 <?import javafx.scene.control.TextField?>
 <BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.mobilepayprojekt.MainScreenController" stylesheets="@../styles/style.css">
     <center>
-        <StackPane fx:id="contentArea">
+        <StackPane>
             <VBox fx:id="mainView" visible="false">
-                <VBox alignment="CENTER">
+                <VBox alignment="CENTER" spacing="10">
                     <padding>
-                        <Insets bottom="10.0" top="25.0"/>
+                        <Insets bottom="10.0" top="25.0" left="15" right="15"/>
                     </padding>
                     <ImageView fitWidth="150" fitHeight="36" pickOnBounds="true" preserveRatio="true">
                         <Image url="@../images/mp_logo_main.png" />
                     </ImageView>
+
                     <ComboBox fx:id="kontoValgComboBox" promptText="Vælg konto"/>
                     <TextField fx:id="beloebField" promptText="Beløb" />
                     <TextField fx:id="modtagerMobilNrField" promptText="Modtagers mobilnr" />

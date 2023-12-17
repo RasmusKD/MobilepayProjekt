@@ -7,7 +7,7 @@ import javafx.stage.Stage;
 
 public class NavigationUtil {
 
-    public static Object goToScreen(Node source, String fxmlFile) {
+    private static Object goToScreen(Node source, String fxmlFile) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(NavigationUtil.class.getResource(fxmlFile));
             Scene scene = new Scene(fxmlLoader.load(), 360, 640);
