@@ -16,7 +16,6 @@ public class UserCreationController {
     private TextField mobilNrField;
     @FXML
     private PasswordField adgangskodeField;
-
     @FXML
     private PasswordField bekraeftAdgangskodeField;
     @FXML

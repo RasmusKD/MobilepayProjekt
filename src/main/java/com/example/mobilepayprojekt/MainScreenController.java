@@ -4,13 +4,18 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.scene.shape.SVGPath;
+
+import java.util.List;
 
 public class MainScreenController {
 
@@ -46,6 +51,8 @@ public class MainScreenController {
     private ComboBox<Konto> kontoValgComboBox;
     @FXML
     private Label mainLabel;
+    @FXML
+    private VBox transaktioner;
 
     private final DbSql dbSql = new DbSql();
 
@@ -53,6 +60,7 @@ public class MainScreenController {
         setActiveView(mainView);
         opdaterKontoValgComboBox();
         Bruger currentUser = Session.getCurrentUser();
+        transaktioner();
         if (currentUser != null) {
             String initials = getInitials(currentUser.getFnavn(), currentUser.getEnavn());
             initialsLabel.setText(initials);
@@ -113,9 +121,8 @@ public class MainScreenController {
 
             dbSql.overfoerPenge(afsenderKonto.getKontoNr(), modtagerMobilNr, beloeb);
             dbSql.tilfoejTransaktion(currentUser.getBrugerId(), modtager.getBrugerId(), beloeb);
-
+            transaktioner();
             mainLabel.setText("Overførsel udført succesfuldt.");
-
         } catch (NumberFormatException e) {
             mainLabel.setText("Beløbet skal være et gyldigt tal.");
         } catch (Exception e) {
@@ -172,6 +179,62 @@ public class MainScreenController {
             label.getStyleClass().add("icon-label-inactive");
         }
     }
+
+    private void transaktioner() {
+        Bruger currentUser = Session.getCurrentUser();
+        List<Transaktion> allTransactions = currentUser.getTransaktioner();
+
+        //rydder alle transaktioner til, når vi refresher
+        transaktioner.getChildren().clear();
+
+        for (Transaktion transaktion : allTransactions) {
+            HBox transaktionInfoBox = new HBox(15);
+            transaktionInfoBox.setAlignment(Pos.CENTER_LEFT);
+            transaktionInfoBox.getStyleClass().add("konto-box");
+
+            //Bestem om transaktionen er sendt eller modtaget
+            boolean isSender = transaktion.getAfsenderId() == currentUser.getBrugerId();
+            String transaktionType = isSender ? "Du overførte penge" : "Du modtog penge";
+
+            //Hent navnet på den anden bruger i transaktionen
+            Bruger andenBruger = dbSql.getBrugerById(isSender ? transaktion.getModtagerId() : transaktion.getAfsenderId());
+            String andenBrugerNavn = andenBruger != null ? andenBruger.getFnavn() + " " + andenBruger.getEnavn() : "Ukendt";
+            String initialer = andenBruger != null ? getInitials(andenBruger.getFnavn(), andenBruger.getEnavn()) : "??";
+
+            //cirkel med initialer
+            Circle initialerCircle = new Circle(18, Color.web("#7a7f85"));
+            Label initialerLabel = new Label(initialer);
+            initialerLabel.getStyleClass().add("initials-label");
+
+            //Tilføj cirkel og initialer til stack
+            StackPane initialerStack = new StackPane();
+            initialerStack.getChildren().addAll(initialerCircle, initialerLabel);
+
+            Label andenBrugerLabel = new Label(andenBrugerNavn);
+            andenBrugerLabel.getStyleClass().add("bold-label");
+
+            Label transaktionTypeLabel = new Label(transaktionType);
+            transaktionTypeLabel.getStyleClass().add(isSender ? "sendt-label" : "modtaget-label");
+
+            Region region = new Region();
+            HBox.setHgrow(region, Priority.ALWAYS);
+
+            double beloeb = transaktion.getBeloeb();
+            String beloebTekst = String.format("%s%.2f", isSender ? "-" : "", beloeb);
+            Label beloebLabel = new Label(beloebTekst);
+            beloebLabel.setTextFill(isSender ? Color.web("#c23c30") : Color.web("#4fb13f"));
+            beloebLabel.getStyleClass().add("bold-label");
+
+            VBox navnOgTypeBox = new VBox(andenBrugerLabel, transaktionTypeLabel);
+            navnOgTypeBox.setAlignment(Pos.CENTER_LEFT);
+
+            transaktionInfoBox.getChildren().addAll(initialerStack, navnOgTypeBox, region, beloebLabel);
+
+            //Omvendt rækkefølge ved at sætte transaktionerne ind på den 0. plads
+            transaktioner.getChildren().add(0, transaktionInfoBox);
+        }
+    }
+
 
     @FXML
     private void handleLogout(ActionEvent event) {

@@ -1,20 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.shape.SVGPath?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.layout.StackPane?>
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.shape.Circle?>
-<?import javafx.scene.shape.Rectangle?>
-<?import javafx.scene.layout.Pane?>
 
-<?import javafx.scene.image.ImageView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.image.Image?>
-<?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
 <BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.mobilepayprojekt.MainScreenController" stylesheets="@../styles/style.css">
     <center>
         <StackPane>
@@ -26,16 +17,30 @@
                     <ImageView fitWidth="150" fitHeight="36" pickOnBounds="true" preserveRatio="true">
                         <Image url="@../images/mp_logo_main.png" />
                     </ImageView>
-
-                    <ComboBox fx:id="kontoValgComboBox" promptText="Vælg konto"/>
-                    <TextField fx:id="beloebField" promptText="Beløb" />
-                    <TextField fx:id="modtagerMobilNrField" promptText="Modtagers mobilnr" />
-                    <Button text="Send Penge" onAction="#sendPenge" />
-                    <Label fx:id="mainLabel"/>
+                    <VBox alignment="CENTER_LEFT">
+                        <Label text="Overfør penge"
+                               style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #3e3345;"/>
+                        <Label text="Overfør fra Konto Nr:" styleClass="form-label"/>
+                        <ComboBox fx:id="kontoValgComboBox" promptText="Vælg konto"/>
+                        <Label text="Mobil Nr" styleClass="form-label"/>
+                        <TextField fx:id="modtagerMobilNrField" promptText="Mobil Nr"/>
+                        <Label text="Beløb" styleClass="form-label"/>
+                        <TextField fx:id="beloebField" promptText="Beløb"/>
+                    </VBox>
+                    <VBox alignment="CENTER" spacing="10">
+                        <Button text="Send Penge" onAction="#sendPenge" styleClass="normal-button"/>
+                        <Label fx:id="mainLabel" styleClass="form-label"/>
+                    </VBox>
                 </VBox>
             </VBox>
             <VBox fx:id="transactionsView" visible="false">
-                <Label text="Transactions"/>
+                <VBox styleClass="konto-box-wrapper">
+                    <Label text="Transaktioner"
+                           style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #3e3345;"/>
+                </VBox>
+                <ScrollPane fitToWidth="true">
+                    <VBox fx:id="transaktioner" styleClass="konto-box-wrapper" spacing="10"/>
+                </ScrollPane>
             </VBox>
             <VBox fx:id="userSettingsView" visible="false">
                 <VBox styleClass="top-bar" alignment="CENTER_LEFT">

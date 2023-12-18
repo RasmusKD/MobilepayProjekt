@@ -42,6 +42,11 @@
     -fx-text-alignment: center;
 }
 
+.bold-label {
+    -fx-font-weight: bold;
+    -fx-font-size: 13px;
+}
+
 .prefix-label {
     -fx-background-color: #fdfcfd;
     -fx-padding: 5px;

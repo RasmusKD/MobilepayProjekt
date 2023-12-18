@@ -9,6 +9,14 @@ public class Bruger {
     private String mobilNr;
     private String adgangskode;
     private ArrayList<Konto> konti;
+    private ArrayList<Transaktion> transaktioner;
+
+    public Bruger(int brugerId, String fnavn, String enavn, String mobilNr) {
+        this.brugerId = brugerId;
+        this.fnavn = fnavn;
+        this.enavn = enavn;
+        this.mobilNr = mobilNr;
+    }
 
     public Bruger(int brugerId, String fnavn, String enavn, String mobilNr, String adgangskode) {
         this.brugerId = brugerId;
@@ -17,6 +25,7 @@ public class Bruger {
         this.mobilNr = mobilNr;
         this.adgangskode = adgangskode;
         this.konti = new ArrayList<>();
+        this.transaktioner = new ArrayList<>();
     }
 
     public int getBrugerId() {
@@ -67,6 +76,14 @@ public class Bruger {
         this.konti = konti;
     }
 
+    public ArrayList<Transaktion> getTransaktioner() {
+        return transaktioner;
+    }
+
+    public void setTransaktioner(ArrayList<Transaktion> transaktioner) {
+        this.transaktioner = transaktioner;
+    }
+
     public void tilfoejKonto(Konto konto, boolean isPrimary) {
         if (isPrimary) {
             for (Konto existingKonto : konti) {
@@ -85,6 +102,11 @@ public class Bruger {
         }
         return null;
     }
+
+    public void tilfoejTransaktion(Transaktion transaktion) {
+        this.transaktioner.add(transaktion);
+    }
+
     public void fjernKonto(int kontoId) {
         konti.removeIf(konto -> konto.getKontoId() == kontoId);
     }

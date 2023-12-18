@@ -6,12 +6,10 @@ import java.sql.*;
 
 public class DbSql {
     private Connection connection;
-    private final Statement stmt;
-    private Statement stmt1;
 
     DbSql() {
         connection = null;
-        stmt = null;
+        Statement stmt = null;
         try {
             String url = "jdbc:sqlite:C://Users/Rasmus/Desktop/Mobilepay.db";
             connection = DriverManager.getConnection(url);
@@ -53,12 +51,55 @@ public class DbSql {
 
                 rsKonto.close();
                 stmtKonto.close();
+                // Henter og tilføjer brugerens transaktioner
+                String sqlTransaktion = "SELECT * FROM Transaktion WHERE afsender_id = ? OR modtager_id = ?";
+                PreparedStatement stmtTransaktion = connection.prepareStatement(sqlTransaktion);
+                stmtTransaktion.setInt(1, brugerId);
+                stmtTransaktion.setInt(2, brugerId);
+                ResultSet rsTransaktion = stmtTransaktion.executeQuery();
+
+                while (rsTransaktion.next()) {
+                    int transaktionId = rsTransaktion.getInt("transaktions_id");
+                    int afsenderId = rsTransaktion.getInt("afsender_id");
+                    int modtagerId = rsTransaktion.getInt("modtager_id");
+                    int beloeb = rsTransaktion.getInt("beloeb");
+                    String dato = rsTransaktion.getString("dato");
+                    Transaktion transaktion = new Transaktion(transaktionId, afsenderId, modtagerId, beloeb, dato);
+                    bruger.tilfoejTransaktion(transaktion);
+                }
+
+                rsTransaktion.close();
+                stmtTransaktion.close();
+
             }
 
             rsBruger.close();
             stmtBruger.close();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
+        }
+        return bruger;
+    }
+
+    public Bruger getBrugerById(int brugerId) {
+        Bruger bruger = null;
+        try {
+            String sql = "SELECT * FROM Bruger WHERE bruger_id = ?";
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            stmt.setInt(1, brugerId);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                String fnavn = rs.getString("fnavn");
+                String enavn = rs.getString("enavn");
+                String mobilNr = rs.getString("mobilnr");
+                bruger = new Bruger(brugerId, fnavn, enavn, mobilNr);
+            }
+
+            rs.close();
+            stmt.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
         return bruger;
     }
@@ -278,18 +319,30 @@ public class DbSql {
         }
     }
 
-    public void tilfoejTransaktion(int afsenderId, int modtagerId, Double beloeb) throws SQLException {
-        String sql = "INSERT INTO Transaktion (afsender_id, modtager_id, beloeb) VALUES (?, ?, ?)";
+    public Transaktion tilfoejTransaktion(int afsenderId, int modtagerId, Double beloeb) throws SQLException {
+        String sql = "INSERT INTO Transaktion (afsender_id, modtager_id, beloeb) VALUES (?, ?, ?) RETURNING *";
+        Transaktion nyTransaktion = null;
 
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setInt(1, afsenderId);
             stmt.setInt(2, modtagerId);
             stmt.setDouble(3, beloeb);
-            stmt.executeUpdate();
+
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                int transaktionsId = rs.getInt("transaktions_id");
+                String dato = rs.getString("dato");
+                nyTransaktion = new Transaktion(transaktionsId, afsenderId, modtagerId, beloeb, dato);
+                Session.getCurrentUser().tilfoejTransaktion(nyTransaktion);
+            }
         } catch (SQLException e) {
             throw e;
         }
+
+        return nyTransaktion;
     }
+
     public void updatePrimaryKonto(int kontoId, boolean isPrimary) throws SQLException {
         String sql = "UPDATE Konto SET is_primary = ? WHERE konto_id = ?";
 
