@@ -23,6 +23,18 @@ public class UserCreationController {
 
     private final DbSql dbSql = new DbSql();
 
+    public void initialize() {
+        fnavnField.textProperty().addListener((observable, oldValue, newValue) -> clearStatusLabel());
+        enavnField.textProperty().addListener((observable, oldValue, newValue) -> clearStatusLabel());
+        mobilNrField.textProperty().addListener((observable, oldValue, newValue) -> clearStatusLabel());
+        adgangskodeField.textProperty().addListener((observable, oldValue, newValue) -> clearStatusLabel());
+        bekraeftAdgangskodeField.textProperty().addListener((observable, oldValue, newValue) -> clearStatusLabel());
+    }
+
+    private void clearStatusLabel() {
+        statusLabel.setText("");
+    }
+
     @FXML
     private void opretBruger() {
         String fnavn = fnavnField.getText();

@@ -27,7 +27,7 @@
             <TextField fx:id="kontoNrField" promptText="Konto nr."/>
             <VBox spacing="10" alignment="CENTER">
                 <Button text="Opret Konto" onAction="#handleCreateAccount" styleClass="normal-button"/>
-                <Label fx:id="errorLabel" styleClass="form-label"/>
+                <Label fx:id="kontoLabel" styleClass="form-label"/>
             </VBox>
             <Region VBox.vgrow="ALWAYS"/>
         </VBox>

@@ -18,7 +18,16 @@ public class LoginController {
     @FXML
     private Label errorLabel;
 
-    private DbSql dbSql = new DbSql();
+    private final DbSql dbSql = new DbSql();
+
+    public void initialize() {
+        mobilNrField.textProperty().addListener((observable, oldValue, newValue) -> clearErrorMessage());
+        passwordField.textProperty().addListener((observable, oldValue, newValue) -> clearErrorMessage());
+    }
+
+    private void clearErrorMessage() {
+        errorLabel.setText("");
+    }
 
     @FXML
     private void handleLogin(ActionEvent event) {

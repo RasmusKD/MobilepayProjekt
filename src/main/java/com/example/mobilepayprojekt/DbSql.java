@@ -11,7 +11,7 @@ public class DbSql {
         connection = null;
         Statement stmt = null;
         try {
-            String url = "jdbc:sqlite:C://Users/Rasmus/Desktop/Mobilepay.db";
+            String url = "jdbc:sqlite:src/main/resources/Mobilepay.db";
             connection = DriverManager.getConnection(url);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
